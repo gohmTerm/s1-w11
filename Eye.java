@@ -52,7 +52,9 @@ public class Eye {
         g.fillOval(pupilX - pupilRadius, pupilY - pupilRadius, 2 * pupilRadius, 2 * pupilRadius);
     }
 
-
+    public void Lazer (Graphics g, int mx, int my){
+        g.drawLine(pupilX, pupilY, mx, my);
+    }
 
     //////
     // MouseListener events
