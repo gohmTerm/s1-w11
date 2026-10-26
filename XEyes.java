@@ -64,8 +64,11 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
     
     // move the pupil when the mouse is clicked
     public void mouseClicked (MouseEvent event) {
+        MX = event.getX();
+        MY = event.getY();
+        repaint();
     }
-  
+
     public void mouseReleased (MouseEvent event) {
     }
     
@@ -84,8 +87,6 @@ public class XEyes extends JPanel implements MouseListener, MouseMotionListener{
     public void mouseMoved (MouseEvent event){
         eye_1.movePupil(event.getX(), event.getY());
         eye_2.movePupil(event.getX(), event.getY());
-        MX = event.getX();
-        MY = event.getY();
         repaint();
     }
     
