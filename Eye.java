@@ -9,6 +9,9 @@ public class Eye {
     private int pupilRadius = 10;
     private double horDist, vertDist;
 
+    public double square(double num){
+        return num*num;
+    }
 
     public Eye(int x, int y, int width, int height) {
         // top left of this eye
@@ -59,7 +62,10 @@ public class Eye {
     //////
     // MouseListener events
     //////
-    
+    public boolean inEye (int mouseX, int mouseY) {
+        double dist = square(mouseX - eyeCenterX) / square(eyeWidth/2-pupilRadius) + square(mouseY - eyeCenterY) / square(eyeHeight/2-pupilRadius);
+        return (dist <= 1);    
+    }
     
     // This sets pupilX and pupilY to the new pupil position, using actual mathematics
     //  learned in high school...
@@ -76,9 +82,14 @@ public class Eye {
             if (deltaY < 0) {
                 // remember, vertDist is the maximum vertical distance the pupil will be from the eye center
                 pupilY = (int) (eyeCenterY - vertDist);
-            } else {
+            }  
+            else {
                 pupilY = (int) (eyeCenterY + vertDist);
-            }
+            } 
+
+        } else if(inEye(clickX,clickY) == true){
+            pupilX = clickX;
+            pupilY = clickY;
         } else {
             // this is for all other clicks.  We use doubles for more precision.
             // remember, slope will be positive if the click was in the upper right or lower left
@@ -90,7 +101,9 @@ public class Eye {
             // findY will calculate the vertical posiiton of the pupil, at most vertDist away from eye center 
             pupilY = (int) findY(precisePupilX, slope);
         }
-    }
+
+        }
+    
     
     // findX calculates the new horizonal position of the pupil, at most horDist away from eye center
     public double findX (double slope, int deltaX) {
